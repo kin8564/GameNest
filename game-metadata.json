@@ -1,0 +1,12 @@
+{
+    "title": "QuackBox Game Nest",
+    "author": "Kingsley Nwabeke, Mildness Onyekwere",
+    "summary": "Minigame Collection",
+    "release_date": "2024-11-03",
+    "multiplayer": false,
+    "genres": ["Arcade", "Platformer"],
+    "times_played": 0,
+    "last_played": 0,
+    "cover_image": "(string) .png/.jpg RELATIVE PATH TO THE COVER IMAGE OF YOUR GAME",
+    "exec": "(string) RELATIVE PATH TO THE EXECUTABLE OF YOUR GAME"
+}
