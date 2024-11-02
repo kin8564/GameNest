@@ -6,7 +6,7 @@ Splash Screen
     Title, then "Start" and "Quit" options
 
 Main Menu
-    
+
 
 Duck Runner - Google’s infinite dino run
     Its dino run
@@ -21,6 +21,4 @@ Bread Bobbing - whack a mole
     Three ‘slots’ in a row
     Eat bread before it sinks under the water
     Avoid catfish (red herrings?, generic fish for now) splashing up from below
-
-
 
