@@ -1,6 +1,12 @@
-Quack Box Game Nes
+Quack Box Game Nest
     Maybe a minigame collection? Depends on how many I can implement
     Required languages: Pygame, Javascript, HTML, Godot
+
+Splash Screen
+    Title, then "Start" and "Quit" options
+
+Main Menu
+    
 
 Duck Runner - Google’s infinite dino run
     Its dino run
