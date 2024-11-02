@@ -1,0 +1,20 @@
+Quack Box Game Nes
+    Maybe a minigame collection? Depends on how many I can implement
+    Required languages: Pygame, Javascript, HTML, Godot
+
+Duck Runner - Google’s infinite dino run
+    Its dino run
+    Score based, speeds up until failure
+
+Migration - Temple run
+    Building up speed until takeoff
+    Change lanes while moving forwards
+
+Bread Bobbing - whack a mole
+    Eating bread crumbs in a pond
+    Three ‘slots’ in a row
+    Eat bread before it sinks under the water
+    Avoid catfish (red herrings?, generic fish for now) splashing up from below
+
+
+
