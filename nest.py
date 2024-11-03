@@ -37,8 +37,9 @@ obstacle_timer = 0
 # Scrolling background
 background_x = 0
 
-# Score
+# Score (and speedup)
 score = 0
+speedup = 0
 font = pygame.font.Font(None, 36)
 
 # Draws player icon onto screen
@@ -71,13 +72,6 @@ while running:
         if event.type == pygame.JOYDEVICEADDED:
             print("Controller connected: " + str(event))
             joy = pygame.joystick.Joystick(event.device_index)
-            # buttons = joy.get_numbuttons()
-            # print(screen, f"Number of buttons: {buttons}")
-
-            # for i in range(buttons):
-            #     button = joy.get_button(i)
-            #     print(screen, f"Button {i:>2} value: {button}")
-            # print(str(joy.get_name()))
 
         # Jump! with controller
         if event.type == pygame.JOYBUTTONDOWN:
@@ -92,68 +86,6 @@ while running:
                 if event.key == pygame.K_UP or pygame.K_SPACE:
                     playerY_change = jump_strength
                     is_jumping = True
-        
-        # # movement with controller buttons
-        # if event.type == pygame.JOYBUTTONDOWN:
-        #     print(event)
-        #     # X button
-        #     if event.button == 0:
-        #         playerY_change = -5
-        #     # A button
-        #     if event.button == 1:
-        #         playerX_change = 5
-        #     # B button
-        #     if event.button == 2:
-        #         playerY_change = 5
-        #     # Y button
-        #     if event.button == 3:
-        #         playerX_change = -5
-        #     # select button
-        #     if event.button == 8:
-        #         running = False
-
-        # # Stops continuous movement when button is lifted (Controller)
-        # if event.type == pygame.JOYBUTTONUP:
-        #     if event.button == 0 or event.button == 2:
-        #         playerY_change = 0
-        #     if event.button == 1 or event.button == 3:
-        #         playerX_change = 0
-
-        # # D-pad Controls (Goofy setup)
-        # if event.type == pygame.JOYAXISMOTION:
-        #     print(event)
-        #     # Horizontal / X axis (D-pad left/right)
-        #     if event.axis == 1 and event.value == 1:
-        #         playerX_change = 5
-        #     if event.axis == 1 and event.value <= -1:
-        #         playerX_change = -5
-        #     if event.axis == 1 and event.value == 0:
-        #         playerX_change = 0
-        #     # Vertical / Y axis (D-pad left/right)
-        #     if event.axis == 4 and event.value == 1:
-        #         playerY_change = 5
-        #     if event.axis == 4 and event.value <= -1:
-        #         playerY_change = -5
-        #     if event.axis == 4 and event.value == 0:
-        #         playerY_change = 0
-
-        # # Keyboard controls
-        # if event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_UP:
-        #         playerY_change = -5
-        #     if event.key == pygame.K_DOWN:
-        #         playerY_change = 5
-        #     if event.key == pygame.K_RIGHT:
-        #         playerX_change = 5
-        #     if event.key == pygame.K_LEFT:
-        #         playerX_change = -5
-
-        # # Stops continuous movement when button is lifted (Keyboard)
-        # if event.type == pygame.KEYUP:
-        #     if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-        #         playerY_change = 0
-        #     if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
-        #         playerX_change = 0
 
     # Changes player position 
     #playerX += playerX_change
@@ -190,6 +122,13 @@ while running:
     score += 1
     score_text = font.render(f"Score: {score}", True, (0, 0, 0))
     screen.blit(score_text, (10, 10))
+    speedup += 1
+
+    # Increase speed at higher scores
+    if speedup == 500:
+        playerX_change += 5
+        obstacle_speed += 5
+        speedup = 0
 
     pygame.display.update()
     # Framerate 60 fps
