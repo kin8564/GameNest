@@ -34,6 +34,11 @@ obstacles = []
 obstacle_speed = 5
 obstacle_timer = 0
 
+# Clouds
+clouds = []
+cloud_speed = 1
+cloud_timer = 0
+
 # Scrolling background
 background_x = 0
 
@@ -50,6 +55,11 @@ def draw_player(x, y):
 def draw_obstacles(obstacles):
     for obs in obstacles:
         pygame.draw.rect(screen, (34, 177, 76), obs)  # Green color for obstacles
+
+# Draw clouds in the sky
+def draw_clouds(clouds):
+    for c in clouds:
+        pygame.draw.ellipse(screen, (255, 255, 255), c)
 
 # Game loop
 running = True
@@ -98,25 +108,39 @@ while running:
         playerY_change = 0
         is_jumping = False
 
-    # Spawn obstacles at random intervals
+    # Spawn obstacles at least every 60 frames
     obstacle_timer += 1
     if obstacle_timer > random.randint(60, 600):  # Spawn at least every 60 frames
         obstacle_x = screen_width
-        obstacle_y = 645  # Position on ground level
-        obstacles.append(pygame.Rect(obstacle_x, obstacle_y, 20, 40))  # Rectangle obstacles
+        obstacle_y = 625  # Position on ground level
+        obstacles.append(pygame.Rect(obstacle_x, obstacle_y, 40, 60))  # Rectangle obstacles
         obstacle_timer = 0
+
+    # Spawn clouds every 30 frames
+    cloud_timer += 1
+    if cloud_timer > 30:
+        cloud_x = screen_width
+        cloud_y = random.randint(200, 400)
+        clouds.append(pygame.Rect(cloud_x, cloud_y, 60, 30))    # Clouds
+        cloud_timer = 0
 
     # Move obstacles and check for collisions
     for obs in obstacles[:]:
         obs.x -= obstacle_speed
         if obs.colliderect(pygame.Rect(playerX, playerY, 50, 50)):
             running = False  # Game over on collision
-        if obs.x < -20:
+        if obs.x < -40:
             obstacles.remove(obs)  # Remove obstacle once it's off-screen
+
+    for cloud in clouds[:]:
+        cloud.x -= cloud_speed
+        if cloud.x < -50:
+            clouds.remove(cloud) # Remove cloud once its off-screen
 
     # Draw objects
     draw_player(playerX, playerY)
     draw_obstacles(obstacles)
+    draw_clouds(clouds)
 
     # Update score and display
     score += 1
@@ -128,6 +152,7 @@ while running:
     if speedup == 500:
         playerX_change += 5
         obstacle_speed += 5
+        cloud_speed += 2
         speedup = 0
 
     pygame.display.update()
